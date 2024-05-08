@@ -1,78 +1,137 @@
-<div class="content-wrapper">
+<style>
+    .btn-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-  <section class="content-header">
-    <h1>Calidad</h1>
-  </section>
+    .btn-image {
+        margin-bottom: 10px;
+    }
 
-  <section class="content">
-    <div class="row">
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario1">
-          <i class="fas fa-cog fa-2x"></i> Formulario 1
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario2">
-          <i class="fas fa-cog fa-2x"></i> Formulario 2
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario3">
-          <i class="fas fa-cog fa-2x"></i> Formulario 3
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario4">
-          <i class="fas fa-cog fa-2x"></i> Formulario 4
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario5">
-          <i class="fas fa-cog fa-2x"></i> Formulario 5
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAgregarFormulario6">
-          <i class="fas fa-cog fa-2x"></i> Formulario 6
-        </button>
-      </div>
-    </div>
-  </section>
+    .content-wrapper-1 {
+        background-color: #3c8dbc; /* Cambia este valor al código de color azul que prefieras */
+    }
 
-</div>
+    .btn-primary {
+        background-color: #ffffff; /* Cambia este valor al código de color blanco que prefieras */
+        border-color: #0a0a0a; /* Cambia este valor al código de color blanco que prefieras */
+        color: #000000;
+        margin: 20px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
 
-<!-- Modales para los formularios -->
+    .btn-shadow {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75) !important;
+    }
+
+</style>
 
 <!-- Formulario 1 -->
-<div id="modalAgregarFormulario1" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form role="form" method="post">
-        <div class="modal-header" style="background:#3c8dbc; color:white">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Formulario 1</h4>
+<?php
+    include 'modalAgregarFormulario1.php';
+    include 'modalAgregarFormulario2.php';
+    include 'modalAgregarFormulario3.php';
+    include 'modalAgregarFormulario4.php';
+    include 'modalAgregarFormulario5.php';
+    include 'modalAgregarFormulario6.php';
+    include 'modalAgregarFormulario7.php';
+?>
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+
+        <h1>
+            Diagramas de control
+        </h1>
+
+        <ol class="breadcrumb">
+            <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Calidad</li>
+        </ol>
+
+    </section>
+
+    <section class="content">
+
+        <div class="box">
+
+            <div class="box-header with-border">
+
+                <div class="content-wrapper-1">
+
+                    <section class="content">
+
+                        <div class="row">
+                            <!-- Primera fila -->
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2  btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioXR">
+                                    <img src="vistas/modulos/imagenes/carta-x-r.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta X-R
+                                </button>
+                            </div>
+
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2 btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioXS">
+                                    <img src="vistas/modulos/imagenes/carta-x-s.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta X-s
+                                </button>
+                            </div>
+
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2 btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioXRM">
+                                    <img src="vistas/modulos/imagenes/carta-x-rm.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta X-Rm
+                                </button>
+                            </div>
+
+                            <!-- Segunda fila -->
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2 btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioP">
+                                    <img src="vistas/modulos/imagenes/carta-p.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta P
+                                </button>
+                            </div>
+
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2 btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioNP">
+                                    <img src="vistas/modulos/imagenes/carta-np.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta np
+                                </button>
+                            </div>
+
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg rounded-circle p-2 btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioC">
+                                    <img src="vistas/modulos/imagenes/carta-c.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta c
+                                </button>
+                            </div>
+
+                            <!-- Tercera fila -->
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <button class="btn btn-primary btn-lg  p-2 mx-auto btn-shadow btn-vertical" data-toggle="modal" data-target="#modalAgregarFormularioU">
+                                    <img src="vistas/modulos/imagenes/carta-u.png" class="img-fluid btn-image" style="width: 100px; height: 100px;">
+                                    Carta u
+                                </button>
+                            </div>
+
+                            <div class="col-md-4"></div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="modal-body">
-          <div class="box-body">
-            <!-- Contenido del formulario 1 -->
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </div>
+
+    </section>
+
 </div>
-
-<!-- Formulario 2 -->
-<!-- Repite la estructura para los formularios 2 al 6 cambiando el ID y el título del formulario -->
-
-<!-- Formulario 3 -->
-
-<!-- Formulario 4 -->
-
-<!-- Formulario 5 -->
-
-<!-- Formulario 6 -->
