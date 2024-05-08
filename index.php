@@ -12,10 +12,6 @@
 	require_once "modelos/productos.modelo.php";
 	require_once "modelos/clientes.modelo.php";
 	require_once "modelos/ventas.modelo.php";
-	/*session_start();
-	$_SESSION["iniciarSesion"] = "ok";
-	$_SESSION["nombre"] = "Jhon";
-	$_SESSION["perfil"] = "Administrador";*/
 
 	$plantilla = new ControladorPlantilla();
 	$plantilla -> ctrPlantilla(); 
