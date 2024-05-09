@@ -3,7 +3,7 @@ FROM php:8.1-apache
 
 # Update system packages and install composer and necessary PHP extensions
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y git libonig-dev zlib1g-dev && \
+    apt-get install -y git libonig-dev zlib1g-dev libpng-dev && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
