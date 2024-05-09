@@ -129,7 +129,7 @@
         };
 
         $.ajax({
-            url: "http://localhost:8080/quality/np/saveAll", // Cambia esto por la URL de tu API
+            url: url_prod + "quality/np/saveAll", // Cambia esto por la URL de tu API
             type: "POST",
             data: JSON.stringify(data),
             contentType: "application/json",
@@ -160,7 +160,7 @@
         var lotNumber = 1; // Inicializa lotNumber en 1 por defecto
 
         $.ajax({
-            url: "http://localhost:8080/quality/np/getAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+            url: url_prod + "quality/np/getAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
             type: "GET",
             success: function(response){
                 $("#tableCardNP tbody").empty(); // Vacía el cuerpo de la tabla
@@ -200,7 +200,7 @@
             };
 
             $.ajax({
-                url: "http://localhost:8080/quality/np/update", // Cambia esto por la URL de tu API
+                url: url_prod + "quality/np/update", // Cambia esto por la URL de tu API
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
@@ -235,7 +235,7 @@
     $(document).ready(function() {
         $('#deleteAllNP').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/np/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/np/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);

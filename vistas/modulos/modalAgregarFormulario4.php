@@ -179,7 +179,7 @@
                 cards_p: data,
                 user_id: user_id
             };
-            fetch('http://localhost:8080/quality/p/saveAll', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/p/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -211,7 +211,7 @@
     });
 
     $(document).ready(function() {
-        fetch('http://localhost:8080/quality/p/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu API
+        fetch(url_prod + 'quality/p/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu API
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -242,12 +242,11 @@
         var totalLotSize = 0;
         var totalDefectiveItems = 0;
         var totalProportion = 0;
-
         // Creamos las filas de la tabla
         for (var i = 1; i <= maxSamples; i++) {
             var sampleData = data.filter(item => item.sample === i);
             var newRow = $('<tr>');
-            newRow.append('<td id="sample_id[]">Muestra ' + i + '</td>');
+            newRow.append('<td id="sample_id[]" value="' + sampleData[0].id + '">Muestra ' + i + '</td>');
             var lotSize = sampleData[0].lot_size;
             var defectiveItems = sampleData[0].defective_items;
             var proportion = sampleData[0].proportion;
@@ -277,16 +276,17 @@
         $('#tableCardP').on('change', 'input[id^="sample_"]', function() {
             var row = $(this).closest('tr');
             var sampleText = row.find('td:first').first().text();
-            var id = parseInt(sampleText.replace('Muestra ', '')); // Extrae el número de la muestra del texto
+            var sample = parseInt(sampleText.replace('Muestra ', '')); // Extrae el número de la muestra del texto
+            var id = parseInt(row.find('td:first').attr('value'));
             var lotSizeInput = row.find('input[name="sample_lot_size[]"]');
             var defectiveItemsInput = row.find('input[name="sample_defective_items[]"]');
             var proportionInput = row.find('input[name="sample_proportion[]"]');
-            var user_id = <?php echo $_SESSION['id'] ?>; // Reemplaza esto con el id de usuario correcto
+            var user_id = 1; // Reemplaza esto con el id de usuario correcto
 
             var payload = {
                 id: id,
-                sample: id,
-                user_id: user_id
+                sample: sample,
+                user_id: <?php echo $_SESSION['id'] ?>
             };
             if (this === lotSizeInput[0]) {
                 payload.lot_size = parseFloat(lotSizeInput.val());
@@ -296,7 +296,7 @@
                 payload.proportion = parseFloat(proportionInput.val());
             }
 
-                fetch('http://localhost:8080/quality/p/update', { // Reemplaza esto con la URL de tu API
+                fetch(url_prod + 'quality/p/update', { // Reemplaza esto con la URL de tu API
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -424,7 +424,7 @@
     $(document).ready(function() {
         $('#deleteAllP').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/p/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/p/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);

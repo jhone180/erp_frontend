@@ -134,7 +134,7 @@
             };
 
             $.ajax({
-                url: 'http://localhost:8080/quality/u/saveAll', // reemplaza esto con la URL de tu API
+                url: url_prod + 'quality/u/saveAll', // reemplaza esto con la URL de tu API
                 type: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
@@ -165,7 +165,7 @@
     $(document).ready(function() {
         var lotNumber;
         $.ajax({
-            url: 'http://localhost:8080/quality/u/getAll?userId=' + <?php echo $_SESSION['id'] ?>, // reemplaza esto con la URL de tu API
+            url: url_prod + 'quality/u/getAll?userId=' + <?php echo $_SESSION['id'] ?>, // reemplaza esto con la URL de tu API
             type: 'GET',
             success: function(response) {
                 response.forEach(function(item) {
@@ -228,7 +228,7 @@
             };
 
             $.ajax({
-                url: 'http://localhost:8080/quality/u/update', // reemplaza esto con la URL de tu API
+                url: url_prod + 'quality/u/update', // reemplaza esto con la URL de tu API
                 type: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
@@ -355,7 +355,7 @@
     $(document).ready(function() {
         $('#deleteAllU').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/u/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/u/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     Swal.fire({

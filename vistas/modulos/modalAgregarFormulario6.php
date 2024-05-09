@@ -128,9 +128,9 @@
 
             var payload = {
                 cards_c: data,
-                user_id: user_id
+                user_id: <?php echo $_SESSION['id'] ?>
             };
-            fetch('http://localhost:8080/quality/c/saveAll', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/c/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -162,7 +162,7 @@
     });
 
     $(document).ready(function() {
-        fetch('http://localhost:8080/quality/c/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Replace this with the URL of your API
+        fetch(url_prod + 'quality/c/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Replace this with the URL of your API
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -211,7 +211,7 @@
             var newValue = this.value;
 
             // Make a POST request to your endpoint with the 'id' and new value as data
-            fetch('http://localhost:8080/quality/c/update', { // Replace this with the URL of your API
+            fetch(url_prod + 'quality/c/update', { // Replace this with the URL of your API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -306,7 +306,7 @@
     $(document).ready(function() {
         $('#deleteAllC').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/c/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/c/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);

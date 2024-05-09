@@ -169,7 +169,7 @@
             event.preventDefault();
 
             var data = [];
-            var user_id = <?php echo $_SESSION['id'] ?>; // Reemplaza esto con el id de usuario correcto
+            var user_id = 1; // Reemplaza esto con el id de usuario correcto
 
 
             $('#tableCardXS tbody tr').each(function() {
@@ -190,10 +190,10 @@
 
             var payload = {
                 cards_xs: data,
-                user_id: user_id
+                user_id: <?php echo $_SESSION['id'] ?>
             };
 
-            fetch('http://localhost:8080/quality/xs/saveAll', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/xs/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -225,7 +225,7 @@
     });
 
     $(document).ready(function() {
-        fetch('http://localhost:8080/quality/xs/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu endpoint
+        fetch(url_prod + 'quality/xs/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu endpoint
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -300,7 +300,7 @@
             var newValue = this.value;
 
             // Haz una solicitud POST a tu endpoint con el 'id' y el nuevo valor como datos
-            fetch('http://localhost:8080/quality/xs/update', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/xs/update', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -416,7 +416,7 @@
     $(document).ready(function() {
         $('#deleteAllXS').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/xs/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/xs/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);

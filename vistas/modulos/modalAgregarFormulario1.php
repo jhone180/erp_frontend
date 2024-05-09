@@ -131,6 +131,9 @@
 </div>
 
 <script>
+
+    var url_prod = 'https://erpbackend-production-f141.up.railway.app/';
+
     var constantsTable = {
         1: { a2: 0, a3: 0, d2: 1.128 },
         2: { a2: 1.880, a3: 2.659, d2: 3.686 },
@@ -216,7 +219,7 @@
             event.preventDefault();
 
             var data = [];
-            var user_id = <?php echo $_SESSION['id'] ?>; // Reemplaza esto con el id de usuario correcto
+            var user_id = 1; // Reemplaza esto con el id de usuario correcto
 
 
             $('#tableCardXR tbody tr').each(function() {
@@ -237,10 +240,10 @@
 
             var payload = {
                 cards_xr: data,
-                user_id: user_id
+                user_id: <?php echo $_SESSION['id'] ?>
             };
 
-            fetch('http://localhost:8080/quality/xr/saveAll', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/xr/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -272,7 +275,7 @@
     });
 
     $(document).ready(function() {
-        fetch('http://localhost:8080/quality/xr/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu endpoint
+        fetch(url_prod + 'quality/xr/getAll?userId=' + <?php echo $_SESSION['id'] ?>, { // Reemplaza esto con la URL de tu endpoint
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -342,7 +345,7 @@
             var newValue = this.value;
 
             // Haz una solicitud POST a tu endpoint con el 'id' y el nuevo valor como datos
-            fetch('http://localhost:8080/quality/xr/update', { // Reemplaza esto con la URL de tu API
+            fetch(url_prod + 'quality/xr/update', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -453,7 +456,7 @@
     $(document).ready(function() {
         $('#deleteAll').click(function() {
             $.ajax({
-                url: "http://localhost:8080/quality/xr/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
+                url: url_prod + "quality/xr/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);
