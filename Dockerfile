@@ -28,5 +28,11 @@ RUN echo '<Directory "/var/www/html">\n\
 # Change current user to www
 USER www-data
 
-# Expose port 8080 and start apache server in the foreground
+# Configure Apache to listen on the correct port
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
+# Expose the correct port
+EXPOSE ${PORT}
+
+# Start apache server in the foreground
 CMD ["apache2-foreground"]
