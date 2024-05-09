@@ -1,54 +1,23 @@
+# Use the official PHP image from the dockerhub
 FROM php:8.1-apache
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# Update system packages and install composer and necessary PHP extensions
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y git && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-RUN a2enmod rewrite
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+# Enable apache modules
+RUN a2enmod rewrite headers
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Copy application source
+COPY . /var/www/html
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Set up node and npm
-
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
-RUN apt-get update && apt-get -y install nodejs 
-
-# Set working directory
-WORKDIR /var/www
-
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
-
-WORKDIR /var/www/html
-COPY . .
-
-#Modify php.ini setings
-
-RUN touch /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "upload_max_filesize = 10M;" >> /usr/local/etc/php/conf.d/uploads.ini
-
-#Serve the application
-
+# Install PHP dependencies
 RUN composer install
-RUN npm install
-CMD php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT
+
+# Change current user to www
+USER www-data
+
+# Expose port 8080 and start apache server in the foreground
+CMD ["apache2-foreground"]
