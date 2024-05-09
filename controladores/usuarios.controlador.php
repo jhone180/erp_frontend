@@ -55,8 +55,10 @@ class ControladorUsuarios{
 						if($ultimoLogin == "ok"){
 
 							echo '<script>
+                                console.log(window.location);
+                           
 
-								window.location = "inicio";
+								//window.location = "inicio";
 
 							</script>';
 
