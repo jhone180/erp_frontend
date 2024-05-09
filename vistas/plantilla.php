@@ -130,8 +130,7 @@ session_start();
     /*=============================================
     CONTENIDO
     =============================================*/
-      print_r($_GET["ruta"]);
-      die();
+      $ruta = ltrim($_SERVER['REQUEST_URI'], '/');
     if(isset($_GET["ruta"])){
 
       if($_GET["ruta"] == "inicio" ||
