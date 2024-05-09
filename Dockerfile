@@ -13,6 +13,9 @@ RUN a2enmod rewrite headers
 # Copy application source
 COPY . /var/www/html
 
+# Allow Composer to run as superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 # Install PHP dependencies
 RUN composer install
 
