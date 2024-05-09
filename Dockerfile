@@ -4,6 +4,9 @@ FROM php:7.4-apache
 # Habilitamos el módulo mod_rewrite de Apache
 RUN a2enmod rewrite
 
+# Configuramos el ServerName para Apache
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+
 # Copiamos el archivo .htaccess al directorio público de Apache
 COPY .htaccess /var/www/html/
 
