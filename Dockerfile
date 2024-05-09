@@ -19,9 +19,6 @@ RUN composer install
 # Change current user to www
 USER www-data
 
-# Update the default apache site with the config we created.
-ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
-
 # By default, .htaccess is ignored. Enable .htaccess through apache config
 RUN echo '<Directory "/var/www/html">\n\
     AllowOverride All\n\
