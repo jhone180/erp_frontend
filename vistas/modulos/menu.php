@@ -32,7 +32,7 @@
 			
 			<li>
 
-				<a href="calidad">
+				<a href="vistas/modulos/calidad.php">
 
 					<i class="fa fa-th"></i>
 					<span>Calidad</span>
