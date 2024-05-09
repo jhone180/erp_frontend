@@ -1,17 +1,53 @@
-# Usamos una imagen base que ya tiene Apache y PHP instalados
-FROM php:7.4-apache
+FROM php:8.1-apache
 
-# Habilitamos el módulo mod_rewrite de Apache
-RUN a2enmod rewrite
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
 
-# Configuramos el ServerName para Apache
-RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
 
-# Copiamos el archivo .htaccess al directorio público de Apache
-COPY .htaccess /var/www/html/
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copiamos el resto de nuestros archivos de la aplicación al directorio público de Apache
-COPY . /var/www/html/
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Exponemos el puerto 80 para que podamos acceder a nuestro sitio web
-EXPOSE 80
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set up node and npm
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
+RUN apt-get update && apt-get -y install nodejs 
+
+# Set working directory
+WORKDIR /var/www
+
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+WORKDIR /var/www/html
+COPY . .
+
+#Modify php.ini setings
+
+RUN touch /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "upload_max_filesize = 10M;" >> /usr/local/etc/php/conf.d/uploads.ini
+
+#Serve the application
+
+RUN composer install
+RUN npm install
+CMD php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT
