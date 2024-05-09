@@ -19,14 +19,14 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install PHP dependencies
 RUN composer install
 
-# Change current user to www
-USER www-data
-
 # By default, .htaccess is ignored. Enable .htaccess through apache config
 RUN echo '<Directory "/var/www/html">\n\
     AllowOverride All\n\
 </Directory>\n'\
 >> /etc/apache2/apache2.conf
+
+# Change current user to www
+USER www-data
 
 # Expose port 8080 and start apache server in the foreground
 CMD ["apache2-foreground"]
