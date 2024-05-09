@@ -4,6 +4,7 @@ FROM php:8.1-apache
 ARG user
 ARG uid
 
+RUN a2enmod rewrite
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -48,5 +49,6 @@ RUN touch /usr/local/etc/php/conf.d/uploads.ini \
 
 #Serve the application
 
+RUN composer install
 RUN npm install
 CMD php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT
