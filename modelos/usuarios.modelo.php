@@ -18,6 +18,7 @@ class ModeloUsuarios{
 
 			$stmt -> execute();
             print_r($stmt -> fetch());
+            die();
 			return $stmt -> fetch();
 
 		}else{
