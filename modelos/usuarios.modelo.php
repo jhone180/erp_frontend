@@ -17,7 +17,7 @@ class ModeloUsuarios{
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
 			$stmt -> execute();
-
+            print_r($stmt -> fetch());
 			return $stmt -> fetch();
 
 		}else{
