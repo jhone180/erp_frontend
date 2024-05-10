@@ -247,6 +247,7 @@
                 title: 'Cargando...',
                 allowEscapeKey: false,
                 allowOutsideClick: false,
+                showConfirmButton: false,
                 onOpen: () => {
                     Swal.showLoading();
                 }
@@ -466,11 +467,21 @@
     // Agrega este código en tu archivo JavaScript
     $(document).ready(function() {
         $('#deleteAll').click(function() {
+            Swal.fire({
+                title: 'Cargando...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url: url_prod + "quality/xr/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);
+                    swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: '¡Buen trabajo!',
@@ -483,6 +494,7 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown);
+                    swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
