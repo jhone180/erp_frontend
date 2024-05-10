@@ -243,6 +243,15 @@
                 user_id: <?php echo $_SESSION['id'] ?>
             };
 
+            Swal.fire({
+                title: 'Cargando...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             fetch(url_prod + 'quality/xr/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
@@ -253,6 +262,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: '¡Buen trabajo!',
@@ -265,6 +275,7 @@
                 })
                 .catch((error) => {
                     console.error('Error:', error);
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
