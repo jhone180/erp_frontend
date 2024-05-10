@@ -18,6 +18,9 @@ class ModeloUsuarios{
 
 			$stmt -> execute();
 
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            print_r($resultado);
+
 			return $stmt -> fetch();
 
 		}else{
