@@ -127,7 +127,15 @@
             "cards_np": cards_np,
             "user_id": <?php echo $_SESSION['id'] ?> // Cambia esto por el id del usuario actual
         };
-
+        Swal.fire({
+            title: 'Cargando...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            onOpen: () => {
+                Swal.showLoading();
+            }
+        });
         $.ajax({
             url: url_prod + "quality/np/saveAll", // Cambia esto por la URL de tu API
             type: "POST",
@@ -135,6 +143,7 @@
             contentType: "application/json",
             success: function(response){
                 console.log(response);
+                Swal.close();
                 Swal.fire({
                     icon: 'success',
                     title: '¡Buen trabajo!',
@@ -147,6 +156,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.error(textStatus, errorThrown);
+                Swal.close();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -234,11 +244,21 @@
     // Agrega este código en tu archivo JavaScript
     $(document).ready(function() {
         $('#deleteAllNP').click(function() {
+            Swal.fire({
+                title: 'Cargando...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url: url_prod + "quality/np/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: '¡Buen trabajo!',
@@ -251,6 +271,7 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown);
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',

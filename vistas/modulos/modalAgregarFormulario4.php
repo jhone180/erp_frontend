@@ -179,6 +179,16 @@
                 cards_p: data,
                 user_id: user_id
             };
+
+            Swal.fire({
+                title: 'Cargando...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             fetch(url_prod + 'quality/p/saveAll', { // Reemplaza esto con la URL de tu API
                 method: 'POST',
                 headers: {
@@ -189,6 +199,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: '¡Buen trabajo!',
@@ -201,6 +212,7 @@
                 })
                 .catch((error) => {
                     console.error('Error:', error);
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -423,11 +435,21 @@
     // Agrega este código en tu archivo JavaScript
     $(document).ready(function() {
         $('#deleteAllP').click(function() {
+            Swal.fire({
+                title: 'Cargando...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url: url_prod + "quality/p/deleteAll?userId=" + <?php echo $_SESSION['id'] ?>, // Cambia esto por la URL de tu API
                 type: "DELETE",
                 success: function(response){
                     console.log(response);
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: '¡Buen trabajo!',
@@ -440,6 +462,7 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown);
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
