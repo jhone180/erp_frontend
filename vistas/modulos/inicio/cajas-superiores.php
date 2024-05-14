@@ -19,6 +19,7 @@ $totalProductos = count($productos);
 
 
 
+
 <div class="col-lg-3 col-xs-6">
 
   <div class="small-box bg-aqua">
