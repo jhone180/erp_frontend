@@ -28,9 +28,14 @@
 
 				</a>
 
-			</li>
-			
-			<li>
+			</li>';
+
+		}
+
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
+
+			echo '
+            <li>
 
 				<a href="calidad">
 
@@ -39,13 +44,8 @@
 
 				</a>
 
-			</li>';
-
-		}
-
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
-
-			echo '<li>
+			</li>
+            <li>
 
 				<a href="categorias">
 
