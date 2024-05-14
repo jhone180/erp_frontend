@@ -118,7 +118,8 @@
                 var average_number_defects_circuit = $(this).find('.average_number_defects_circuit_new').val();
 
 
-                if (!isNaN(lot) && !isNaN(sample_size) && !isNaN(totally_defective) && !isNaN(average_number_defects_circuit)) {
+                if (!isNaN(lot) && !isNaN(sample_size) && !isNaN(totally_defective) && !isNaN(average_number_defects_circuit)
+                    && lot !== '' && sample_size !== '' && totally_defective !== '' && average_number_defects_circuit !== '') {
                     cards_u.push({
                         lot: parseInt(lot),
                         sample_size: parseInt(sample_size),

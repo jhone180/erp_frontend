@@ -197,7 +197,7 @@
                     months.push('Mes ' + item.month);
                     intoxications.push(item.intoxicated);
                 });
-                var average = total / count;
+                var average = !isNaN(total / count) ? total / count : 0;
                 var averageRow = $('<tr>');
                 averageRow.append('<td>Promedio</td>');
                 averageRow.append('<td>' + average.toFixed(2) + '</td>');

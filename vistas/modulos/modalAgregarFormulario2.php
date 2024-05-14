@@ -148,19 +148,18 @@
 
         $('#addHourXS').click(function() {
             var table = $('#tableCardXS');
-            var numHours = table.find('tr')[0].cells.length - 4;
-            if (numHours >= 10) {
+            var numHours = table.find('tr')[0].cells.length - 4; // Restamos 1 en lugar de 4 para considerar solo las columnas de horas
+            if (numHours >= 25) {
                 return;
             }
 
             table.find('tr').each(function(index, row) {
                 if (index == 0) {
-                    $('<th>Hora ' + (numHours + 1) + '</th>').insertBefore($(row).find('th').eq(-3)); // Insertamos antes de la celda de Media
+                    $(row).find('th').eq(-3).before('<th>Hora ' + (numHours + 1) + '</th>'); // Insertamos antes de la última celda de Hora
                 } else {
-                    $('<td><input type="number" class="form-control" name="sample_weightXS[]"></td>').insertBefore($(row).find('td').eq(-2)); // Insertamos antes de la celda de Media
+                    $(row).find('td').eq(-3).before('<td><input type="number" class="form-control" name="sample_weightXS[]"></td>'); // Insertamos antes de la última celda de Hora
                 }
             });
-
         });
     });
 

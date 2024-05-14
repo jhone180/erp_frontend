@@ -117,10 +117,12 @@
             var lot = $(this).find("td:first").text().split(" ")[1]; // Obtiene el número del lote
             var defective_items_sample = $(this).find("input").val(); // Obtiene el valor del campo numérico
 
-            cards_np.push({
-                "lot": parseInt(lot),
-                "defective_items_sample": parseInt(defective_items_sample)
-            });
+            if(!isNaN(defective_items_sample) && defective_items_sample !== ""){
+                cards_np.push({
+                    "lot": parseInt(lot),
+                    "defective_items_sample": parseInt(defective_items_sample)
+                });
+            }
         });
 
         var data = {
